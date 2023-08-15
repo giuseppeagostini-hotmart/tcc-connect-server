@@ -1,0 +1,12 @@
+2023-08-15 19:29:08 error: uncaughtException: listen EADDRINUSE: address already in use :::3005
+Error: listen EADDRINUSE: address already in use :::3005
+    at Server.setupListenHandle [as _listen2] (node:net:1431:16)
+    at listenInCluster (node:net:1479:12)
+    at Server.listen (node:net:1567:7)
+    at Function.listen (/Users/giuseppe.agostini/Documents/pessoal/tcc-connect-server/node_modules/express/lib/application.js:635:24)
+    at App.listen (/Users/giuseppe.agostini/Documents/pessoal/tcc-connect-server/src/app.ts:34:14)
+    at Object.<anonymous> (/Users/giuseppe.agostini/Documents/pessoal/tcc-connect-server/src/server.ts:11:5)
+    at Module._compile (node:internal/modules/cjs/loader:1120:14)
+    at Module.m._compile (/Users/giuseppe.agostini/Documents/pessoal/tcc-connect-server/node_modules/ts-node/src/index.ts:1618:23)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1174:10)
+    at Object.require.extensions.<computed> [as .ts] (/Users/giuseppe.agostini/Documents/pessoal/tcc-connect-server/node_modules/ts-node/src/index.ts:1621:12)
