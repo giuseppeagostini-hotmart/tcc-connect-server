@@ -120,6 +120,46 @@ paths:
           description: 'Bad Request'
         500:
           description: 'Server Error'
+  # [POST] /login
+  /logout:
+    post:
+      tags:
+        - auth
+      summary: Logout Endpoint
+      parameters:
+        - name: body
+          in: body
+          description: logout Endpoint
+          required: true
+          schema:
+            $ref: '#/definitions/logout'
+      responses:
+        201:
+          description: 'Logout Success'
+        400:
+          description: 'Bad Request'
+        500:
+          description: 'Server Error'
+
+/signup:
+  post:
+    tags:
+      - auth
+    summary: Signup Endpoint
+    parameters:
+      - name: body
+        in: body
+        description: Signup Endpoint
+        required: true
+        schema:
+          $ref: '#/definitions/signup'
+    responses:
+      201:
+        description: 'Signup Success'
+      400:
+        description: 'Bad Request'
+      500:
+        description: 'Server Error'
 # definitions
 definitions:
   users:
@@ -146,6 +186,19 @@ definitions:
       password:
         type: string
         description: user Password
+
+signup:
+  type: object
+  required:
+    - email
+    - password
+  properties:
+    email:
+      type: string
+      description: user Email
+    password:
+      type: string
+      description: user Password
 
 schemes:
   - https
