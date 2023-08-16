@@ -120,19 +120,12 @@ paths:
           description: 'Bad Request'
         500:
           description: 'Server Error'
-  # [POST] /login
+  # [POST] /logout
   /logout:
-    post:
+    get:
       tags:
         - auth
       summary: Logout Endpoint
-      parameters:
-        - name: body
-          in: body
-          description: logout Endpoint
-          required: true
-          schema:
-            $ref: '#/definitions/logout'
       responses:
         201:
           description: 'Logout Success'
@@ -156,6 +149,19 @@ paths:
     responses:
       201:
         description: 'Signup Success'
+      400:
+        description: 'Bad Request'
+      500:
+        description: 'Server Error'
+
+/isLogged:
+  get:
+    tags:
+      - auth
+    summary: Logged Endpoint
+    responses:
+      201:
+        description: 'Logged Success'
       400:
         description: 'Bad Request'
       500:
@@ -187,11 +193,11 @@ definitions:
         type: string
         description: user Password
 
-signup:
-  type: object
-  required:
-    - email
-    - password
+  signup:
+    type: object
+    required:
+      - email
+      - password
   properties:
     email:
       type: string

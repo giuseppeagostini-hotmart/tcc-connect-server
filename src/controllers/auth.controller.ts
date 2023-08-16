@@ -41,6 +41,17 @@ class AuthController {
       next(error);
     }
   };
+
+  public isLogged = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    try {
+      const userData: User = req.user;
+      const user: User = await this.authService.logout(userData);
+
+      res.status(200).json({ data: user, message: 'logout' });
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default AuthController;
