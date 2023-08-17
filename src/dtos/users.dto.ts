@@ -1,6 +1,9 @@
-import { IsEmail, IsString } from 'class-validator';
+import { IsBoolean, IsEmail, IsString } from 'class-validator';
 
 export class CreateUserDto {
+  @IsBoolean()
+  public isProfessor: boolean;
+
   @IsEmail(undefined, {
     message: 'O formato do e-mail não está correto.',
   })

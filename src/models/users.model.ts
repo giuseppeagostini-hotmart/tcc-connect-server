@@ -12,6 +12,10 @@ const userSchema: Schema = new Schema(
       type: String,
       required: true,
     },
+    isProfessor: {
+      type: Boolean,
+      require: true,
+    },
   },
   { collection: 'users' },
 );
