@@ -12,10 +12,10 @@ class AuthService {
   public users = userModel;
 
   public async signup(userData: CreateUserDto): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
+    if (isEmpty(userData)) throw new HttpException(400, 'Usuario não encontrado');
 
     const findUser: User = await this.users.findOne({ email: userData.email });
-    if (findUser) throw new HttpException(409, `This email ${userData.email} already exists`);
+    if (findUser) throw new HttpException(409, `O email ${userData.email} jã existe`);
 
     const hashedPassword = await hash(userData.password, 10);
     const createUserData: User = await this.users.create({ ...userData, password: hashedPassword });
@@ -24,14 +24,14 @@ class AuthService {
   }
 
   public async login(userData: CreateUserDto): Promise<{ cookie: string; findUser: User }> {
-    if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
+    if (isEmpty(userData)) throw new HttpException(400, 'Usuario não encontrado');
 
     const findUser: User = await this.users.findOne({ email: userData.email });
-    if (!findUser) throw new HttpException(409, `This email ${userData.email} was not found`);
+    if (!findUser) throw new HttpException(409, `Não foi possivel encontrar o email: ${userData.email}`);
 
     const isPasswordMatching: boolean = await compare(userData.password, findUser.password);
 
-    if (!isPasswordMatching) throw new HttpException(409, 'Password is not matching');
+    if (!isPasswordMatching) throw new HttpException(409, 'Senha incorreta!');
 
     const tokenData = this.createToken(findUser);
     const cookie = this.createCookie(tokenData);
@@ -40,10 +40,10 @@ class AuthService {
   }
 
   public async logout(userData: User): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, 'userData is empty');
+    if (isEmpty(userData)) throw new HttpException(400, 'Usuario não encontrado');
 
     const findUser: User = await this.users.findOne({ email: userData.email, password: userData.password });
-    if (!findUser) throw new HttpException(409, `This email ${userData.email} was not found`);
+    if (!findUser) throw new HttpException(409, `Não foi possivel encontrar o email: ${userData.email}`);
 
     return findUser;
   }
