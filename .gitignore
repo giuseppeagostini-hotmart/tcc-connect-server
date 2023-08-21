@@ -11,6 +11,9 @@ lerna-debug.log*
 .env.development
 .env.production
 
+dist/
+dist-ssr
+
 .DS_Store
 
 src/utils/*
