@@ -8,6 +8,9 @@
   "bin": {
     "typescript-express-mongoose-starter": "./bin/cli.js"
   },
+  "engines": {
+    "node": ">=14.20.1"
+  },
   "scripts": {
     "start": "npm run build && cross-env NODE_ENV=production node dist/server.js",
     "dev": "cross-env NODE_ENV=development nodemon server.ts",
