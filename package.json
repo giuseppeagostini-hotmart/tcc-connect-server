@@ -1,10 +1,10 @@
 {
-  "name": "typescript-express-mongoose-starter",
-  "version": "1.1.7",
+  "name": "api-tcc-connect",
+  "version": "1.0.0",
   "private": false,
-  "description": "TypeScript + Express + Mongoose + MongoDB",
-  "license": "ISC",
-  "author": "Ahmad Joya",
+  "description": "Api TCC Connect",
+  "license": "MIT",
+  "author": "Giuseppe Fantoni",
   "engines": {
     "node": "18"
   },
@@ -32,14 +32,12 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.0",
     "morgan": "^1.10.0",
-    "swagger-jsdoc": "^6.2.1",
+    "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.5.0",
     "winston": "^3.8.1",
     "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
-    "@swc/cli": "^0.1.57",
-    "@swc/core": "^1.2.220",
     "@types/bcrypt": "^5.0.0",
     "@types/compression": "^1.7.2",
     "@types/cookie-parser": "^1.4.3",
@@ -78,26 +76,5 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ahmadjoya/typescript-express-mongoose-starter.git"
-  },
-  "keywords": [
-    "TypeScript",
-    "Express",
-    "ExpressJS",
-    "express.js",
-    "mongoose",
-    "typescript express",
-    "typescript express mongoose",
-    "starter",
-    "boilerplate",
-    "typescript express mongooses tarter",
-    "typescript-express-mongooses-tarter"
-  ],
-  "bugs": {
-    "url": "https://github.com/ahmadjoya/typescript-express-mongoose-starter/issues"
-  },
-  "homepage": "https://github.com/ahmadjoya/typescript-express-mongoose-starter#readme"
+  }
 }
