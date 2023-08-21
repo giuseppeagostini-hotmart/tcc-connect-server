@@ -7,7 +7,7 @@ import hpp from 'hpp';
 import { ConnectOptions, connect, set } from 'mongoose';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { NODE_ENV, PORT } from '@config';
+import { NODE_ENV, PORT, DB_USER } from '@config';
 import { dbConnection } from '@databases';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
@@ -35,6 +35,7 @@ class App {
       logger.info(`=================================`);
       logger.info(`======= ENV: ${this.env} =======`);
       logger.info(`🚀 App listening on the port ${this.port}`);
+      logger.info(`USER ${DB_USER}`);
       logger.info(`=================================`);
     });
   }
@@ -57,7 +58,7 @@ class App {
   }
 
   private initializeMiddlewares() {
-    this.app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
+    this.app.use(cors({ credentials: true, origin: true }));
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());
