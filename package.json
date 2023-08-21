@@ -5,9 +5,6 @@
   "description": "TypeScript + Express + Mongoose + MongoDB",
   "license": "ISC",
   "author": "Ahmad Joya",
-  "bin": {
-    "typescript-express-mongoose-starter": "./bin/cli.js"
-  },
   "engines": {
     "node": ">=14.20.1"
   },
