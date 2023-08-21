@@ -6,7 +6,7 @@
   "license": "ISC",
   "author": "Ahmad Joya",
   "engines": {
-    "node": ">=14.20.1"
+    "node": ">=14 <15"
   },
   "scripts": {
     "start": "npm run build && cross-env NODE_ENV=production node dist/server.js",
