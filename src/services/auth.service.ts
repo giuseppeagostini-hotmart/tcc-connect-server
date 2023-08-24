@@ -8,6 +8,11 @@ import { User } from '@interfaces/users.interface';
 import userModel from '@models/users.model';
 import { isEmpty } from '@utils/util';
 
+export type CookieType = {
+  newCookie: string;
+  legacy: string;
+};
+
 class AuthService {
   public users = userModel;
 
@@ -23,7 +28,7 @@ class AuthService {
     return createUserData;
   }
 
-  public async login(userData: CreateUserDto): Promise<{ cookie: string; findUser: User }> {
+  public async login(userData: CreateUserDto): Promise<{ cookie: CookieType; findUser: User }> {
     if (isEmpty(userData)) throw new HttpException(400, 'Usuario não encontrado');
 
     const findUser: User = await this.users.findOne({ email: userData.email });
@@ -56,8 +61,11 @@ class AuthService {
     return { expiresIn, token: sign(dataStoredInToken, secretKey, { expiresIn }) };
   }
 
-  public createCookie(tokenData: TokenData): string {
-    return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}; SameSite=None; Secure`;
+  public createCookie(tokenData: TokenData): CookieType {
+    return {
+      newCookie: `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}; SameSite=None; Secure`,
+      legacy: `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`,
+    };
   }
 }
 

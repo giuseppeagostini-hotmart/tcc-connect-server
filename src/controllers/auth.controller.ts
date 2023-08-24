@@ -23,7 +23,7 @@ class AuthController {
       const userData: CreateUserDto = req.body;
       const { cookie, findUser } = await this.authService.login(userData);
 
-      res.setHeader('Set-Cookie', [cookie]);
+      res.setHeader('Set-Cookie', [cookie.newCookie, cookie.legacy]);
       res.status(200).json({ data: findUser, message: 'login' });
     } catch (error) {
       console.log(error);
@@ -36,7 +36,7 @@ class AuthController {
       const userData: User = req.user;
       const logOutUserData: User = await this.authService.logout(userData);
 
-      res.setHeader('Set-Cookie', [`Authorization=; Max-age=0; SameSite=None; Secure`]);
+      res.setHeader('Set-Cookie', [`Authorization=; Max-age=0; SameSite=None; Secure`, `Authorization=; Max-age=0`]);
       res.status(200).json({ data: logOutUserData, message: 'logout' });
     } catch (error) {
       next(error);
