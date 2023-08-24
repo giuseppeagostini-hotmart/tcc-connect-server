@@ -74,7 +74,7 @@ class AuthService {
   }
 
   public createLegacyCookie(tokenData: TokenData): string {
-    return `LegacyAuthorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`;
+    return `LegacyAuthorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}; Secure`;
   }
 }
 
