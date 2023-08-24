@@ -9,6 +9,8 @@ const getAuthCookie = cookies => cookies['Authorization'] || cookies['LegacyAuth
 
 const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFunction) => {
   try {
+    console.log('Cookies', req.cookies);
+    console.log('req Cookies', getAuthCookie(req.cookies));
     const Authorization = getAuthCookie(req.cookies) || (req.header('Authorization') ? req.header('Authorization').split('Bearer ')[1] : null);
 
     if (Authorization) {
