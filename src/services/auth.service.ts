@@ -1,6 +1,6 @@
 import { hash, compare } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
-import { SECRET_KEY, BASE_ROUTE } from '@config';
+import { SECRET_KEY } from '@config';
 import { CreateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
@@ -57,8 +57,7 @@ class AuthService {
   }
 
   public createCookie(tokenData: TokenData): string {
-    console.log(BASE_ROUTE);
-    return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}; SameSite=Lax; Secure; Domain=${BASE_ROUTE}; Path=/`;
+    return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}; SameSite=None; Secure`;
   }
 }
 
