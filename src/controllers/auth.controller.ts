@@ -3,6 +3,7 @@ import { CreateUserDto } from '@dtos/users.dto';
 import { RequestWithUser } from '@interfaces/auth.interface';
 import { User } from '@interfaces/users.interface';
 import AuthService from '@services/auth.service';
+import { BASE_ROUTE } from '@/config';
 
 class AuthController {
   public authService = new AuthService();
@@ -36,7 +37,7 @@ class AuthController {
       const userData: User = req.user;
       const logOutUserData: User = await this.authService.logout(userData);
 
-      res.setHeader('Set-Cookie', ['Authorization=; Max-age=0; SameSite=None; Secure']);
+      res.setHeader('Set-Cookie', [`Authorization=; Max-age=0; SameSite=Lax; Secure; Domain=${BASE_ROUTE}`]);
       res.status(200).json({ data: logOutUserData, message: 'logout' });
     } catch (error) {
       next(error);
