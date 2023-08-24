@@ -28,7 +28,7 @@ class AuthService {
     return createUserData;
   }
 
-  public async login(userData: CreateUserDto): Promise<{ cookies: string[]; findUser: User }> {
+  public async login(userData: CreateUserDto): Promise<{ tokenData: TokenData; findUser: User }> {
     if (isEmpty(userData)) throw new HttpException(400, 'Usuario não encontrado');
 
     const findUser: User = await this.users.findOne({ email: userData.email });
@@ -40,25 +40,16 @@ class AuthService {
 
     const tokenData = this.createToken(findUser);
 
-    const cookies = [this.createCookie(tokenData), this.createLegacyCookie(tokenData)];
-
-    return { cookies, findUser };
+    return { tokenData, findUser };
   }
 
-  public async logout(userData: User): Promise<{ cookies: string[]; findUser: User }> {
+  public async logout(userData: User): Promise<{ findUser: User }> {
     if (isEmpty(userData)) throw new HttpException(400, 'Usuario não encontrado');
 
     const findUser: User = await this.users.findOne({ email: userData.email, password: userData.password });
     if (!findUser) throw new HttpException(409, `Não foi possivel encontrar o email: ${userData.email}`);
 
-    const tokenData: TokenData = {
-      token: '',
-      expiresIn: 0,
-    };
-
-    const cookies = [this.createCookie(tokenData), this.createLegacyCookie(tokenData)];
-
-    return { cookies, findUser };
+    return { findUser };
   }
 
   public createToken(user: User): TokenData {
@@ -67,14 +58,6 @@ class AuthService {
     const expiresIn: number = 60 * 60;
 
     return { expiresIn, token: sign(dataStoredInToken, secretKey, { expiresIn }) };
-  }
-
-  public createCookie(tokenData: TokenData): string {
-    return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}; SameSite=None; Secure`;
-  }
-
-  public createLegacyCookie(tokenData: TokenData): string {
-    return `LegacyAuthorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}; Secure`;
   }
 }
 
