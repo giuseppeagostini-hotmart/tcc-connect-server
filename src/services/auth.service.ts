@@ -58,7 +58,7 @@ class AuthService {
 
   public createCookie(tokenData: TokenData): string {
     console.log(BASE_ROUTE);
-    return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}; SameSite=Lax; Secure; Domain=${BASE_ROUTE}`;
+    return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}; SameSite=Lax; Secure; Domain=${BASE_ROUTE}; Path=/`;
   }
 }
 
