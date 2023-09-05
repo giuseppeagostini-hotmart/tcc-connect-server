@@ -16,6 +16,10 @@ const userSchema: Schema = new Schema(
       type: Boolean,
       require: true,
     },
+    first_time: {
+      type: Boolean,
+      require: true,
+    },
   },
   { collection: 'users' },
 );

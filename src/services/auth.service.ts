@@ -23,7 +23,8 @@ class AuthService {
     if (findUser) throw new HttpException(409, `O email ${userData.email} já existe`);
 
     const hashedPassword = await hash(userData.password, 10);
-    const createUserData: User = await this.users.create({ ...userData, password: hashedPassword });
+    const createUserData: User = await this.users.create({ ...userData, password: hashedPassword, first_time: true });
+    console.log('DTO', createUserData);
 
     return createUserData;
   }
@@ -55,7 +56,7 @@ class AuthService {
   public createToken(user: User): TokenData {
     const dataStoredInToken: DataStoredInToken = { _id: user._id };
     const secretKey: string = SECRET_KEY;
-    const expiresIn: number = 60 * 60;
+    const expiresIn = '9999 years';
 
     return { expiresIn, token: sign(dataStoredInToken, secretKey, { expiresIn }) };
   }
