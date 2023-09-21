@@ -1,4 +1,4 @@
-import { IsBoolean, IsEmail, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateUserDto {
   @IsBoolean()
@@ -13,4 +13,23 @@ export class CreateUserDto {
     message: 'O formato da senha não está correto.',
   })
   public password: string;
+}
+
+export class UpdateUserDtoClass {
+  @IsString()
+  public campus: string;
+
+  @IsBoolean()
+  public firstTime: boolean;
+
+  @IsString()
+  public institution: string;
+
+  @IsString()
+  public name: string;
+
+  @IsArray()
+  @IsString({ each: true })
+  @IsNotEmpty()
+  public interests: string[];
 }

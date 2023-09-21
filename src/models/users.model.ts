@@ -16,9 +16,29 @@ const userSchema: Schema = new Schema(
       type: Boolean,
       require: true,
     },
-    first_time: {
+    firstTime: {
       type: Boolean,
       require: true,
+    },
+    isProfessorAvaliable: {
+      type: Boolean,
+      require: false,
+    },
+    name: {
+      type: String,
+      require: false,
+    },
+    institution: {
+      type: String,
+      require: false,
+    },
+    campus: {
+      type: String,
+      require: false,
+    },
+    interests: {
+      type: Array,
+      require: false,
     },
   },
   { collection: 'users' },

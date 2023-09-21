@@ -23,8 +23,12 @@ class AuthService {
     if (findUser) throw new HttpException(409, `O email ${userData.email} já existe`);
 
     const hashedPassword = await hash(userData.password, 10);
-    const createUserData: User = await this.users.create({ ...userData, password: hashedPassword, first_time: true });
-    console.log('DTO', createUserData);
+    const createUserData: User = await this.users.create({
+      ...userData,
+      password: hashedPassword,
+      firstTime: true,
+      isProfessorAvaliable: userData.isProfessor ? true : null,
+    });
 
     return createUserData;
   }
