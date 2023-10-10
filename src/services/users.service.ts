@@ -13,6 +13,11 @@ class UserService {
     return users;
   }
 
+  public async findAllProfessors(): Promise<User[]> {
+    const users: User[] = await this.users.find({ isProfessor: true });
+    return users;
+  }
+
   public async findUserById(userId: string): Promise<User> {
     if (isEmpty(userId)) throw new HttpException(400, 'UserId is empty');
 
